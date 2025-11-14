@@ -1,16 +1,17 @@
 package com.example.graphqlserver.controller;
 
-import com.example.graphqlserver.dto.input.AddAuthorInput;
-import com.example.graphqlserver.dto.output.AddAuthorPayload;
-import com.example.graphqlserver.model.Author;
-import com.example.graphqlserver.repository.AuthorRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
+import com.example.graphqlserver.dto.input.AddAuthorInput;
+import com.example.graphqlserver.dto.output.AddAuthorPayload;
+import com.example.graphqlserver.model.Author;
+import com.example.graphqlserver.repository.AuthorRepository;
 
 @Controller
 public class AuthorController {
@@ -24,18 +25,23 @@ public class AuthorController {
 
     @QueryMapping
     public List<Author> authors() {
-        return authorRepository.getAuthors();
+        return authorRepository.findAll();
     }
 
     @QueryMapping
-    public  Author authorById(@Argument("id") int id) {
-        return authorRepository.getAuthorById(id);
+    public Author authorById(@Argument Integer id) {
+        return authorRepository.findById(id).orElse(null);
     }
 
     @MutationMapping
     public AddAuthorPayload addAuthor(@Argument AddAuthorInput input) {
-        var author = authorRepository.save(input.firstName(), input.lastName());
-        var out = new AddAuthorPayload(author);
-        return out;
+
+        Author author = new Author();
+        author.setFirstName(input.firstName());
+        author.setLastName(input.lastName());
+
+        Author saved = authorRepository.save(author);
+
+        return new AddAuthorPayload(saved);
     }
 }
