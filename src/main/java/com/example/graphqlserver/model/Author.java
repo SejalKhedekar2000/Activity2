@@ -1,30 +1,46 @@
 package com.example.graphqlserver.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "authors")
 public class Author {
 
-    private int id;
-    private final String firstName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    private String firstName;
+
+    private String lastName;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books = new ArrayList<>();
 
-    public Author(int id, String firstName, String lastName, List<Book> books) {
+
+    public Author() {}
+
+    public Author(Integer id, String firstName, String lastName, List<Book> books) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.books = books;
     }
 
-    private final String lastName;
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,8 +48,16 @@ public class Author {
         return firstName;
     }
 
+    public void setFirstName(String firstName) { 
+        this.firstName = firstName; 
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) { 
+        this.lastName = lastName; 
     }
 
     public List<Book> getBooks() {
@@ -43,6 +67,4 @@ public class Author {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-
-
 }
