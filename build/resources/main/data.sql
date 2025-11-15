@@ -1,39 +1,41 @@
-
-INSERT INTO AUTHOR (id, first_name, last_name)
+INSERT INTO authors (first_name, last_name)
 VALUES
-    (0, 'Robert', 'Frost'),
-    (1, 'Martin', 'Fowler'),
-    (2, 'Kevin', 'Gary'),
-    (3, 'Kent', 'Beck'),
-    (4, 'James', 'Gosling'),
-    (5, 'Bjarne', 'Stroustrup'),
-    (6, 'Joshua', 'Bloch'),
-    (7, 'Andrew', 'Hunt'),
-    (8, 'David', 'Thomas'),
-    (9, 'Eric', 'Evans');
+    ('Clara', 'Benson'),
+    ('Nigel', 'Carter'),
+    ('Marina', 'Lopez'),
+    ('Samir', 'Patel'),
+    ('Helen', 'Tran'),
+    ('Winston', 'Grey'),
+    ('Olivia', 'Hart'),
+    ('Felix', 'Donovan'),
+    ('Priya', 'Menon'),
+    ('Marcus', 'Ellwood');
 
-
-INSERT INTO BOOK (isbn, title, author_id)
+INSERT INTO books (isbn, title, author_id)
 VALUES
-    ('123456789', 'The Road Not Taken', 0),
-    ('987654321', 'Refactoring', 1),
-    ('456789123', 'Software Engineering Essentials', 2),
+    ('110000001', 'Echoes of the Northern Sky', 1),
+    ('110000002', 'Winds Beneath the Lantern', 1),
 
-    ('111111111', 'Test-Driven Development', 3),
-    ('222222222', 'Extreme Programming Explained', 3),
+    ('220000011', 'Patterns of Modern Systems', 2),
+    ('220000012', 'A Practical Guide to Modular Design', 2),
 
-    ('333333333', 'The Java Programming Language', 4),
-    ('444444444', 'The Java Language Specification', 4),
+    ('330000021', 'Silent Rivers', 3),
+    ('330000022', 'The Mapmaker’s Dilemma', 3),
 
-    ('555555555', 'The C++ Programming Language', 5),
-    ('666666666', 'Programming: Principles and Practice', 5),
+    ('440000031', 'Bridging the Quantum Divide', 4),
 
-    ('777777777', 'Effective Java', 6),
-    ('888888888', 'Java Puzzlers', 6),
+    ('550000041', 'Foundations of Human Computation', 5),
+    ('550000042', 'Architectures of the Digital Age', 5),
 
-    ('999999999', 'The Pragmatic Programmer', 7),
-    ('101010101', 'Pragmatic Thinking & Learning', 7),
+    ('660000051', 'Stories From the Midnight Hall', 6),
 
-    ('202020202', 'The Pragmatic Programmer 20th Anniversary', 8),
+    ('770000061', 'Whispers of the Ancient Valley', 7),
+    ('770000062', 'The Gardens Beyond the Harbour', 7),
 
-    ('303030303', 'Domain-Driven Design', 9);
+    ('880000071', 'Courage Under Two Suns', 8),
+
+    ('990000081', 'Paths of Sand and Stone', 9),
+    ('990000082', 'Journeys Through Crimson Forests', 9),
+
+    ('101000091', 'The Geometry of Memory', 10),
+    ('101000092', 'Fragments of a Remembered Future', 10);

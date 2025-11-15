@@ -1,4 +1,3 @@
-
 type Query {
     authors: [Author]
     authorById(id: ID): Author
@@ -7,19 +6,17 @@ type Query {
     bookByISBN(isbn: String): Book
 }
 
-type Book {
-    isbn: String
-    title: String
-
-    author: Author
-}
-
 type Author {
     id: ID
     firstName: String
     lastName: String
-
     books: [Book]
+}
+
+type Book {
+    isbn: String
+    title: String
+    author: Author
 }
 
 input AddAuthorInput {
@@ -30,7 +27,6 @@ input AddAuthorInput {
 input AddBookInput {
     isbn: String
     title: String
-
     authorId: ID
 }
 
