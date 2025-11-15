@@ -16,7 +16,7 @@ type Author {
 type Book {
     isbn: String
     title: String
-    author: Author
+    authorId: ID
 }
 
 input AddAuthorInput {
