@@ -54,4 +54,17 @@ public class BookController {
 
         return new AddBookPayload(saved);
     }
+
+    @QueryMapping
+    public List<Book> booksByAuthorId(@Argument Integer authorId) {
+        return bookRepository.findByAuthorId(authorId);
+    }
+
+    @QueryMapping
+    public List<Book> booksByTitleSubstring(@Argument String substring) {
+        if (substring == null || substring.isBlank()) {
+            return List.of();
+        }
+        return bookRepository.findByTitleContainingIgnoreCase(substring);
+    }
 }
