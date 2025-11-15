@@ -10,5 +10,8 @@ import com.example.graphqlserver.model.Author;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
-     List<Author> findByLastNameIgnoreCase(String lastName);
+    List<Author> findByLastNameIgnoreCase(String lastName);
+
+    List<Author> findByFirstNameIgnoreCase(String firstName);
+
 }

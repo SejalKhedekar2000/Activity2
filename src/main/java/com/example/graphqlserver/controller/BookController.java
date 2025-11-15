@@ -67,4 +67,44 @@ public class BookController {
         }
         return bookRepository.findByTitleContainingIgnoreCase(substring);
     }
+
+    @MutationMapping
+    public String deleteBookByIsbn(@Argument String isbn) {
+        if (isbn == null || isbn.isBlank()) {
+            return null;
+        }
+
+        return bookRepository.findById(isbn)
+                .map(book -> {
+                    try {
+                        bookRepository.delete(book);
+                        return isbn; 
+                    } catch (Exception ex) {
+                        return null;
+                    }
+                })
+                .orElse(null);
+    }
+
+    @QueryMapping
+    public List<String> bookTitlesByAuthorFirstName(@Argument String firstName) {
+        if (firstName == null || firstName.isBlank()) {
+            return List.of();
+        }
+
+        var authors = authorRepository.findByFirstNameIgnoreCase(firstName);
+        if (authors.isEmpty()) {
+            return List.of();
+        }
+
+        var authorIds = authors.stream()
+                .map(Author::getId)
+                .toList();
+
+        var books = bookRepository.findByAuthorIdIn(authorIds);
+
+        return books.stream()
+                .map(Book::getTitle)
+                .toList();
+    }
 }
