@@ -44,4 +44,33 @@ public class AuthorController {
 
         return new AddAuthorPayload(saved);
     }
+
+    @QueryMapping
+    public List<Author> authorsByLastName(@Argument String lastName) {
+        if (lastName == null || lastName.isBlank()) {
+            return List.of();
+        }
+        return authorRepository.findByLastNameIgnoreCase(lastName);
+    }
+
+    @MutationMapping
+    public String updateAuthorLastName(@Argument Integer id,
+                                       @Argument String newLastName) {
+        if (id == null || newLastName == null || newLastName.isBlank()) {
+            return null;
+        }
+
+        return authorRepository.findById(id)
+                .map(author -> {
+                    String oldLastName = author.getLastName();
+                    author.setLastName(newLastName);
+                    try {
+                        authorRepository.save(author);
+                        return oldLastName; 
+                    } catch (Exception ex) {
+                        return null;
+                    }
+                })
+                .orElse(null);
+    }
 }
