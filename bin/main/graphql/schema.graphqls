@@ -42,3 +42,14 @@ type Mutation {
     addAuthor(input: AddAuthorInput): AddAuthorPayload
     addBook(input: AddBookInput): AddBookPayload
 }
+extend type Query {
+  booksByAuthorId(authorId: ID!): [Book]
+  booksByTitleSubstring(substring: String!): [Book]
+  authorsByLastName(lastName: String!): [Author]
+  bookTitlesByAuthorFirstName(firstName: String!): [String]
+}
+
+extend type Mutation {
+  updateAuthorLastName(id: ID!, newLastName: String!): String
+  deleteBookByIsbn(isbn: String!): String
+}
