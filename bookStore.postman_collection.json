@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "d223fbe1-7a80-4cdf-94e9-5cc41af9e6cb",
-    "name": "BookStore-Activity2",
+    "name": "BookStore",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -113,6 +113,374 @@
           "mode": "graphql",
           "graphql": {
             "query": "mutation {\n  addBook(input: {\n    isbn: \"1111\"\n    title: \"New JPA Book\"\n    authorId: 1\n  }) {\n    book {\n      isbn\n      title\n      author {\n        id\n        firstName\n      }\n    }\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+
+    {
+      "name": "1.1 booksByAuthorId existing (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByAuthorId(authorId: 1) {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "1.2 booksByAuthorId no books(Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByAuthorId(authorId: 999) {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "1.3 - booksByAuthorId invalid type (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByAuthorId(authorId: \"abc\") {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+    {
+      "name": "2.1 booksByTitleSubstring match Memory (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByTitleSubstring(substring: \"Memory\") {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "2.2  booksByTitleSubstring no match (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByTitleSubstring(substring: \"ZZZ_NO_MATCH\") {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "2.3 - booksByTitleSubstring blank substring (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  booksByTitleSubstring(substring: \"\") {\n    isbn\n    title\n    authorId\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+
+    {
+      "name": "3.1  authorsByLastName (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  authorsByLastName(lastName: \"Carter\") {\n    id\n    firstName\n    lastName\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "3.2 authorsByLastName no such lastName (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  authorsByLastName(lastName: \"DoesNotExist\") {\n    id\n    firstName\n    lastName\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "3.3 authorsByLastName blank lastName (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  authorsByLastName(lastName: \"\") {\n    id\n    firstName\n    lastName\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+    {
+      "name": "4.1 updateAuthorLastName id 2 (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  updateAuthorLastName(id: 2, newLastName: \"NewLast\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "4.2 updateAuthorLastName id not found (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  updateAuthorLastName(id: 999, newLastName: \"Anything\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "4.3 updateAuthorLastName blank newLastName (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  updateAuthorLastName(id: 2, newLastName: \"\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+    {
+      "name": "5.1 deleteBookByIsbn existing (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  deleteBookByIsbn(isbn: \"110000001\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "5.2 deleteBookByIsbn nonexisting (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  deleteBookByIsbn(isbn: \"NO_SUCH_ISBN\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "5.3 deleteBookByIsbn blank isbn (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation {\n  deleteBookByIsbn(isbn: \"\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+
+    {
+      "name": "6.1 bookTitlesByAuthorFirstName (Positive)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  bookTitlesByAuthorFirstName(firstName: \"Clara\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "6.2  bookTitlesByAuthorFirstName no match (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  bookTitlesByAuthorFirstName(firstName: \"NoFirstName\")\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "6.3 bookTitlesByAuthorFirstName blank firstName (Negative)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  bookTitlesByAuthorFirstName(firstName: \"\")\n}",
             "variables": ""
           }
         },
