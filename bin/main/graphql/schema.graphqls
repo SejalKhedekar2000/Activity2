@@ -1,0 +1,44 @@
+type Query {
+    authors: [Author]
+    authorById(id: ID): Author
+
+    books: [Book]
+    bookByISBN(isbn: String): Book
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+
+type Book {
+    isbn: String
+    title: String
+    author: Author
+}
+
+input AddAuthorInput {
+    firstName: String
+    lastName: String
+}
+
+input AddBookInput {
+    isbn: String
+    title: String
+    authorId: ID
+}
+
+type AddAuthorPayload {
+    author: Author
+}
+
+type AddBookPayload {
+    book: Book
+}
+
+type Mutation {
+    addAuthor(input: AddAuthorInput): AddAuthorPayload
+    addBook(input: AddBookInput): AddBookPayload
+}
