@@ -6,25 +6,25 @@
   },
   "item": [
     {
-      "name": "get Authors",
-      "request": {
-        "method": "POST",
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query {\n  authors {\n    id\n    firstName\n    lastName\n    books {\n      isbn\n      title\n      author {\n        id\n        firstName\n      }\n    }\n  }\n}",
-            "variables": ""
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/graphql",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8080",
-          "path": ["graphql"]
-        }
+  "name": "get Authors",
+  "request": {
+    "method": "POST",
+    "body": {
+      "mode": "graphql",
+      "graphql": {
+        "query": "query {\n  authors {\n    id\n    firstName\n    lastName\n    books {\n      isbn\n      title\n      authorId\n    }\n  }\n}",
+        "variables": ""
       }
     },
+    "url": {
+      "raw": "http://localhost:8080/graphql",
+      "protocol": "http",
+      "host": ["localhost"],
+      "port": "8080",
+      "path": ["graphql"]
+    }
+  }
+},
     {
       "name": "Get Author By ID",
       "request": {
@@ -46,45 +46,46 @@
       }
     },
     {
-      "name": "Get Books",
-      "request": {
-        "method": "POST",
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query {\n  books {\n    isbn\n    title\n    author {\n      id\n      firstName\n    }\n  }\n}",
-            "variables": ""
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/graphql",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8080",
-          "path": ["graphql"]
-        }
+  "name": "Get Books",
+  "request": {
+    "method": "POST",
+    "body": {
+      "mode": "graphql",
+      "graphql": {
+        "query": "query {\n  books {\n    isbn\n    title\n    authorId\n  }\n}",
+        "variables": ""
       }
     },
+    "url": {
+      "raw": "http://localhost:8080/graphql",
+      "protocol": "http",
+      "host": ["localhost"],
+      "port": "8080",
+      "path": ["graphql"]
+    }
+  }
+}
+,
     {
-      "name": "Get Book By ISBN",
-      "request": {
-        "method": "POST",
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query {\n  bookByISBN(isbn: \"123456789\") {\n    isbn\n    title\n    author {\n      id\n      firstName\n      lastName\n    }\n  }\n}",
-            "variables": ""
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/graphql",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8080",
-          "path": ["graphql"]
-        }
+  "name": "Get Book By ISBN",
+  "request": {
+    "method": "POST",
+    "body": {
+      "mode": "graphql",
+      "graphql": {
+        "query": "query {\n  bookByISBN(isbn: \"110000001\") {\n    isbn\n    title\n    authorId\n  }\n}",
+        "variables": ""
       }
     },
+    "url": {
+      "raw": "http://localhost:8080/graphql",
+      "protocol": "http",
+      "host": ["localhost"],
+      "port": "8080",
+      "path": ["graphql"]
+    }
+  }
+},
     {
       "name": "Add Author",
       "request": {
@@ -105,29 +106,26 @@
         }
       }
     },
-    {
-      "name": "Add Book",
-      "request": {
-        "method": "POST",
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "mutation {\n  addBook(input: {\n    isbn: \"1111\"\n    title: \"New JPA Book\"\n    authorId: 1\n  }) {\n    book {\n      isbn\n      title\n      author {\n        id\n        firstName\n      }\n    }\n  }\n}",
-            "variables": ""
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/graphql",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8080",
-          "path": ["graphql"]
-        }
+  {
+  "name": "Add Book",
+  "request": {
+    "method": "POST",
+    "body": {
+      "mode": "graphql",
+      "graphql": {
+        "query": "mutation {\n  addBook(input: {\n    isbn: \"123123123\"\n    title: \"Test Insert Book\"\n    authorId: 1\n  }) {\n    book {\n      isbn\n      title\n      authorId\n    }\n  }\n}",
+        "variables": ""
       }
     },
-
-
-    {
+    "url": {
+      "raw": "http://localhost:8080/graphql",
+      "protocol": "http",
+      "host": ["localhost"],
+      "port": "8080",
+      "path": ["graphql"]
+    }
+  }
+},    {
       "name": "1.1 booksByAuthorId existing (Positive)",
       "request": {
         "method": "POST",
