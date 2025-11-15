@@ -1,0 +1,27 @@
+# Gradle cache & build artifacts
+.gradle/
+build/
+bin/
+
+# Logs
+*.log
+
+# IDE stuff
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# JAR/WAR files
+*.jar
+*.war
